@@ -240,6 +240,7 @@ button {
     url(images/df-bg.avif)
       center/cover;
   transform: scale(1.04);
+  will-change: transform;
 }
 
 .hero-overlay {
@@ -261,6 +262,7 @@ button {
 
 .hero-copy {
   max-width: 850px;
+  animation: heroReveal 0.9s var(--ease) both;
 }
 
 .eyebrow {
@@ -350,6 +352,7 @@ button {
   align-items: flex-end;
   gap: 16px;
   color: #aaa;
+  animation: heroReveal 0.8s 0.35s var(--ease) both;
 }
 
 .hero-side-line {
@@ -381,6 +384,7 @@ button {
   font-size: 10px;
   letter-spacing: 0.15em;
   z-index: 2;
+  animation: heroReveal 0.75s 0.5s var(--ease) both;
 }
 
 .hero-bottom > div {
@@ -787,6 +791,7 @@ button {
 }
 
 .value {
+  position: relative;
   display: grid;
   grid-template-columns: 70px 1fr;
   gap: 25px;
@@ -1441,6 +1446,133 @@ button {
     font-family: Georgia, serif;
 }
 
+/* ANIMATIONS  */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.hero-image {
+    animation: heroImage 12s ease-in-out infinite alternate;
+}
+
+@keyframes heroReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroImage {
+    from {
+        transform: scale(1.04);
+    }
+
+    to {
+        transform: scale(1.1);
+    }
+}
+
+.service-card,
+.value,
+.team-card {
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.service-card:hover,
+.value:hover {
+    transform: translateY(-8px);
+}
+
+.service-card:hover {
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+}
+
+.team-card:hover {
+    transform: translateY(-4px);
+}
+
+.service-card::after,
+.value::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #c99a3b;
+    transition: width 0.4s ease;
+}
+
+.service-card:hover::after,
+.value:hover::after {
+    width: 100%;
+}
+
+.capability-item {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.capability-item:hover {
+    transform: translateY(-3px);
+    color: #c99a3b;
+}
+
+.contact-section .form-group {
+    transition: transform 0.25s ease;
+}
+
+.contact-section .form-group:focus-within {
+    transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
 
 @media (max-width: 1000px) {
 
