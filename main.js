@@ -19,3 +19,22 @@
                 menuToggle.setAttribute("aria-label", "Open menu");
             });
         });
+
+
+const contactForm = document.getElementById("contactForm");
+
+contactForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const button = contactForm.querySelector(".form-submit");
+    const buttonText = button.querySelector("span");
+
+    buttonText.textContent = "Enquiry Ready";
+    button.style.background = "#17191a";
+
+    setTimeout(() => {
+        buttonText.textContent = "Send Enquiry";
+        button.style.background = "";
+        contactForm.reset();
+    }, 2500);
+});
